@@ -1,20 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokemonsComponent } from './pokemons/pokemons.component';
-import { PokemonComponent } from './pokemons/pokemon/pokemon.component';
+import { StoreModule } from '@ngrx/store';
+import { PokemonsModule } from './pokemons/pokemons.module';
+import { EffectsModule } from '@ngrx/effects';
+import { PokemonsEffects } from './pokemons/pokemons.effects';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PokemonsComponent,
-    PokemonComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([PokemonsEffects]),
+    PokemonsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
