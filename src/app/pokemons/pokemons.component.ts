@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../app.store';
 import * as fromPokemons from './pokemons.store';
@@ -8,7 +8,8 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-pokemons',
   templateUrl: './pokemons.component.html',
-  styleUrls: ['./pokemons.component.scss']
+  styleUrls: ['./pokemons.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PokemonsComponent implements OnInit, OnDestroy {
 
@@ -30,8 +31,9 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   }
 
   load() {
-    const limit = 30;
     this.store.dispatch(PokemonsLoadAll());
   }
+
+  
 
 }

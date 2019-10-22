@@ -24,14 +24,14 @@ export class PokemonsEffects {
         ofType<{ type: string, payload: any }>(
             Action.PokemonsLoadSuccess
         ),
-        tap(({ type, payload }) => { alert(type); })
+        tap(({ type, payload }) => { window.alert(type); })
     ), { dispatch: false });
 
     error$ = createEffect(() => this.actions$.pipe(
         ofType<{ type: string, payload: string }>(
             Action.PokemonsLoadError
         ),
-        tap(({ type, payload }) => { alert(type); }),
+        tap(({ type, payload }) => { window.alert(type); }),
     ), { dispatch: false });
 
     constructor(
