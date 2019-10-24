@@ -33,8 +33,6 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     if (!pokemons) {
       return;
     }
-    console.log(pokemons);
-    console.log(this.array);
     this.dataSource = new MatTableDataSource(pokemons);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
