@@ -33,19 +33,34 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     if (!pokemons) {
       return;
     }
-    console.log(pokemons)
-    console.log(this.array)
-    this.dataSource = new MatTableDataSource(this.array);
+    console.log(pokemons);
+    console.log(this.array);
+    this.dataSource = new MatTableDataSource(pokemons);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   });
   array = [
-    { number: 1, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
-    { number: 2, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
-    { number: 3, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
-    { number: 4, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
-    { number: 5, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
-  ]
+    { number: 1, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 2, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 3, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 4, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 5, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 6, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 7, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 8, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 9, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 10, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 11, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 12, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 13, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 14, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 15, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 16, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 17, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 18, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 19, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 20, name: 'oi', url: 'https://pokeapi.co/api/v2/pokemon/1/' },
+  ];
 
   constructor(private readonly store: Store<fromRoot.AppState>) { }
 

@@ -6,9 +6,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { PokemonsEffects } from './pokemons/pokemons.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DevelopmentComponent } from './development/development.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DevelopmentComponent],
   imports: [
     StoreModule.forRoot({}),
     EffectsModule.forRoot([PokemonsEffects]),
