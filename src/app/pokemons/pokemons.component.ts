@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../app.store';
 import * as fromPokemons from './pokemons.store';
@@ -6,6 +6,15 @@ import { PokemonsLoadLimited, PokemonsLoadAll, PokemonLoad } from './pokemons.ac
 import { take } from 'rxjs/operators';
 import { keyBy } from 'lodash';
 import { PokemonNumber } from '../shared/pokemon-number';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+
+interface Pokemon {
+  name: string;
+  number: number;
+  ulr: string;
+}
 
 @Component({
   selector: 'app-pokemons',
@@ -14,19 +23,29 @@ import { PokemonNumber } from '../shared/pokemon-number';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PokemonsComponent implements OnInit, OnDestroy {
-
-  public pokemons: Array<any> = [];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  displayedColumns: string[] = ['number', 'name'];
+  public dataSource = new MatTableDataSource<any>(undefined);
   public initialPokemon = 0;
   public finalPokemon = 11;
   public readonly pokemonsSubscription = this.store.pipe(select(fromPokemons.pokemons)).subscribe((pokemons) => {
     if (!pokemons) {
       return;
     }
-    this.pokemons = pokemons;
-    for (let index = 1; index < 12; index++) {
-      this.loadPokemon(index);
-    }
+    console.log(pokemons)
+    console.log(this.array)
+    this.dataSource = new MatTableDataSource(this.array);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   });
+  array = [
+    { number: 1, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 2, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 3, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 4, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
+    { number: 5, name: 'oi', url:'https://pokeapi.co/api/v2/pokemon/1/' },
+  ]
 
   constructor(private readonly store: Store<fromRoot.AppState>) { }
 
@@ -42,6 +61,6 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   }
 
   loadPokemon(pokemonNumber: number) {
-    this.store.dispatch(PokemonLoad({payload: pokemonNumber}));
+    this.store.dispatch(PokemonLoad({ payload: pokemonNumber }));
   }
 }

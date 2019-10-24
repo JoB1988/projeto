@@ -8,6 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { PokemonsEffects } from './pokemons.effects';
 import { PokemonsService } from './pokemons.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     StoreModule.forFeature(pokemonsReducer.pokemonsFeatureKey, pokemonsReducer.reducer),
     EffectsModule.forFeature([PokemonsEffects]),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [PokemonsService],
   exports: [PokemonsComponent]

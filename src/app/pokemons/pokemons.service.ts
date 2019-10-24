@@ -33,4 +33,10 @@ export class PokemonsService {
         );
     }
 
+    public method() {
+        for (let index = 1; index < 12; index++) {
+            // this.loadPokemon(index);
+          }
+    }
+
 }
