@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as pokemonsActions from '../pokemons/pokemons.actions';
 import { keyBy } from 'lodash';
+import { PokemonNumber } from '../shared/pokemon-number';
 
 export interface PokemonsState {
     pokemons: Array<any>;
@@ -15,10 +16,17 @@ const pokemonsReducer = createReducer(
     on(pokemonsActions.PokemonsLoadSuccess, (state, {payload}) => (
             {
                 ...state,
-                pokemons: { ...state.pokemons, payload}
+                pokemons: keyBy(PokemonNumber.pokemonNumber(payload), 'number')
             }
         )
     ),
+    on(pokemonsActions.PokemonLoadSuccess, (state, {payload}) => (
+            {
+                ...state,
+                pokemons: keyBy(payload, 'name')
+            }
+        )
+    )
 );
 
 export function reducer(pokemonState: PokemonsState | undefined, action: Action) {

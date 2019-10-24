@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [PokemonsService],
-  exports:[PokemonsComponent]
+  exports: [PokemonsComponent]
 })
 export class PokemonsModule { }
 

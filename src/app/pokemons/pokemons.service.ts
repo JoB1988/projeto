@@ -11,7 +11,7 @@ export class PokemonsService {
 
     }
 
-    public read(): Observable<Array<any>> | undefined {
+    public getAllPokemons(): Observable<Array<any>> | undefined {
         const headers = new HttpHeaders({
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
@@ -21,4 +21,16 @@ export class PokemonsService {
             catchError((msg: any) => msg)
         );
     }
+
+    public getPokemon(pokemonName: string): Observable<Array<any>> | undefined {
+        const headers = new HttpHeaders({
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+        });
+        return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`, { headers }).pipe(
+            map((response: any) => response),
+            catchError((msg: any) => msg)
+        );
+    }
+
 }
