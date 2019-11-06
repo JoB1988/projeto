@@ -1,19 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 
 export enum Action {
-    PokemonsLoadAll = '[Pokemons] Load All',
-    PokemonsLoadLimited = '[Pokemons] Load Limited',
+    PokemonsLoad = '[Pokemons] Load',
     PokemonsLoadSuccess = '[Pokemons] Load Success',
     PokemonsLoadError = '[Pokemons] Load Error',
-    PokemonLoad = '[Pokemon] Load',
-    PokemonLoadSuccess = '[Pokemon] Load Success',
-    PokemonLoadError = '[Pokemon] Load Error',
+    PokemonLoadByQuantity = '[Pokemon] Load By Quantity',
+    PokemonLoadByQuantitySuccess = '[Pokemon] Load By Quantity Success',
+    PokemonLoadByQuantityError = '[Pokemon] Load By Quantity Error',
 }
 
-export const PokemonsLoadAll = createAction(Action.PokemonsLoadAll);
-export const PokemonsLoadLimited = createAction(Action.PokemonsLoadLimited, props<{payload: number}>());
-export const PokemonsLoadSuccess = createAction(Action.PokemonsLoadSuccess, props<{payload: Array<any>}>());
-export const PokemonsLoadError = createAction(Action.PokemonsLoadError, props<{payload: any}>());
-export const PokemonLoad = createAction(Action.PokemonLoad, props<{payload: number}>());
-export const PokemonLoadSuccess = createAction(Action.PokemonsLoadError, props<{payload: any}>());
-export const PokemonLoadError = createAction(Action.PokemonsLoadError, props<{payload: any}>());
+export const PokemonsLoad = createAction(Action.PokemonsLoad);
+export const PokemonsLoadSuccess = createAction(Action.PokemonsLoadSuccess, props<{ payload: Array<any> }>());
+export const PokemonsLoadError = createAction(Action.PokemonsLoadError, props<{ payload: any }>());
+export const PokemonLoadByQuantity = createAction(Action.PokemonLoadByQuantity, props<{ payload: { initial: number, final: number }}>());
+export const PokemonLoadByQuantitySuccess = createAction(Action.PokemonLoadByQuantitySuccess, props<{ payload: any[] }>());
+export const PokemonLoadByQuantityError = createAction(Action.PokemonsLoadError, props<{ payload: any }>());
