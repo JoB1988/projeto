@@ -1,18 +1,14 @@
-import { keyBy } from 'lodash';
+import { SimplePokemon } from '../pokemons/pokemons';
+
+const REGEX = /(\d+)(?!.*\d)/;
 
 export class PokemonNumber {
-    public static pokemonNumber(pokemons: Array<any>): Array<any> {
-        const formatedPokemonArray = [];
+    public static pokemonNumber(pokemons: Array<SimplePokemon>): Array<SimplePokemon> {
+        const formatedPokemonArray: Array<SimplePokemon> = [];
         pokemons.forEach(pokemon => {
-            if (pokemon['url']) {
-                let num = pokemon['url'].substring(34, 40);
-                const numIndex = parseInt(num.indexOf('/'));
-                num = parseInt(num.substring(0, numIndex));
-                pokemon['id'] = num;
-                formatedPokemonArray.push(pokemon);
-            } else {
-                formatedPokemonArray.push(pokemon);
-            }
+            // tslint:disable-next-line: radix
+            pokemon.id  = parseInt(pokemon.url.match(REGEX)[1]);
+            formatedPokemonArray.push(pokemon);
         });
         return formatedPokemonArray;
     }

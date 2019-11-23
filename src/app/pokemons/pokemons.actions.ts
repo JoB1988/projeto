@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { SimplePokemon } from './pokemons';
 
 export enum Action {
     PokemonsLoad = '[Pokemons] Load',
@@ -10,7 +11,7 @@ export enum Action {
 }
 
 export const PokemonsLoad = createAction(Action.PokemonsLoad);
-export const PokemonsLoadSuccess = createAction(Action.PokemonsLoadSuccess, props<{ payload: Array<any> }>());
+export const PokemonsLoadSuccess = createAction(Action.PokemonsLoadSuccess, props<{ payload: Array<SimplePokemon> }>());
 export const PokemonsLoadError = createAction(Action.PokemonsLoadError, props<{ payload: any }>());
 export const PokemonLoadByQuantity = createAction(Action.PokemonLoadByQuantity, props<{ payload: { initial: number, final: number }}>());
 export const PokemonLoadByQuantitySuccess = createAction(Action.PokemonLoadByQuantitySuccess, props<{ payload: Array<any> }>());

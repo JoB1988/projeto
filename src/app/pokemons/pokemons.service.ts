@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { Observable } from 'rxjs';
+import { SimplePokemon } from './pokemons';
 
 const PRAGMA = 'pragma';
 const NO_CACHE = 'no-cache';
@@ -19,7 +20,7 @@ export class PokemonsService {
 
     constructor(private http: HttpClient) { }
 
-    public getAllPokemons(): Observable<any> {
+    public getAllPokemons(): Observable<Array<SimplePokemon>> {
         const headers = new HttpHeaders({ CACHE_CONTROL: NO_CACHE, PRAGMA: NO_CACHE });
         return this.http.get<any>(URL + 'pokemon?limit=1000&offset=0', { headers }).pipe(
             map((response: any) => response.results),
