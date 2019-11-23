@@ -7,6 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { withLatestFrom, take } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { PokemonComponent } from './pokemon/pokemon.component';
 
 @Component({
   selector: 'app-pokemons',
@@ -18,7 +20,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  displayedColumns: string[] = ['id', 'name', 'image', 'shinyform'];
+  displayedColumns: string[] = ['id', 'name', 'image', 'shinyform', 'ellipsis'];
 
   public dataSource: MatTableDataSource<Array<any>>;
   public readonly searchByQuantityInitial$ = this.store.pipe(select(fromPokemons.initial));
@@ -28,14 +30,12 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     if (!pokemons || pokemons.length === 0) {
       return;
     }
-
-    //the error is below
-    this.dataSource.data = new MatTableDataSource(pokemons);
+    this.dataSource = new MatTableDataSource(pokemons);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   });
 
-  constructor(private readonly store: Store<fromRoot.AppState>) { }
+  constructor(private readonly store: Store<fromRoot.AppState>, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.store.dispatch(PokemonsLoad());
@@ -55,6 +55,17 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.pokemonsSubscription.unsubscribe();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PokemonComponent, {
+      width: '250px',
+      data: null
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
   }
 
 }
