@@ -3,7 +3,14 @@
   <p>{{pokemon?.name}}</p>
 </div>
 <div class="carousel">
-  Carroussel
+  <img [src]="pokemon?.sprites?.front_default" alt="">
+  <img [src]="pokemon?.sprites?.back_default" alt="">
+  <img [src]="pokemon?.sprites?.front_female" alt="">
+  <img [src]="pokemon?.sprites?.back_female" alt="">
+  <img [src]="pokemon?.sprites?.front_shiny" alt="">
+  <img [src]="pokemon?.sprites?.back_shiny" alt="">
+  <img [src]="pokemon?.sprites?.front_shiny_female" alt="">
+  <img [src]="pokemon?.sprites?.back_shiny_female" alt="">
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
