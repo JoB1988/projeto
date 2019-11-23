@@ -34,7 +34,6 @@ import { MatMenuModule, MatIconModule, MatFormFieldModule, MatDialogModule } fro
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    MatFormFieldModule,
     MatDialogModule
   ],
   providers: [PokemonsService],

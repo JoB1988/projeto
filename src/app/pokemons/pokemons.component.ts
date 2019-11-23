@@ -57,10 +57,12 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     this.pokemonsSubscription.unsubscribe();
   }
 
-  openDialog(): void {
+  openDialog(pokemon): void {
+    console.log(pokemon)
+    console.log(this.dataSource.data)
     const dialogRef = this.dialog.open(PokemonComponent, {
       width: '250px',
-      data: null
+      data: pokemon
     });
 
     dialogRef.afterClosed().subscribe(result => {
