@@ -10,7 +10,7 @@ import { withLatestFrom, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemons',
-  templateUrl: './pokemons.component.html',
+  templateUrl: './pokemons.component.html's,
   styleUrls: ['./pokemons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -29,7 +29,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
       return;
     }
     debugger
-    this.dataSource = new MatTableDataSource(pokemons);
+    this.dataSource.data = new MatTableDataSource(pokemons);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   });
