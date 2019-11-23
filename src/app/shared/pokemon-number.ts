@@ -2,7 +2,7 @@ import { keyBy } from 'lodash';
 
 export class PokemonNumber {
     public static pokemonNumber(pokemons: Array<any>): Array<any> {
-        let formatedPokemonArray = [];
+        const formatedPokemonArray = [];
         pokemons.forEach(pokemon => {
             if (pokemon['url']) {
                 let num = pokemon['url'].substring(34, 40);

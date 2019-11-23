@@ -10,7 +10,7 @@ import { withLatestFrom, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemons',
-  templateUrl: './pokemons.component.html's,
+  templateUrl: './pokemons.component.html',
   styleUrls: ['./pokemons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -20,7 +20,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   displayedColumns: string[] = ['id', 'name', 'image', 'shinyform'];
 
-  public dataSource: MatTableDataSource<any>;
+  public dataSource: MatTableDataSource<Array<any>>;
   public readonly searchByQuantityInitial$ = this.store.pipe(select(fromPokemons.initial));
   public readonly searchByQuantityfinal$ = this.store.pipe(select(fromPokemons.final));
   public readonly isLoading$ = this.store.pipe(select(fromPokemons.isLoading));
@@ -28,7 +28,8 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     if (!pokemons || pokemons.length === 0) {
       return;
     }
-    debugger
+
+    //the error is below
     this.dataSource.data = new MatTableDataSource(pokemons);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

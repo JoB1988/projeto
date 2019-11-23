@@ -10,7 +10,6 @@ import {
     PokemonLoadByQuantityError,
     PokemonLoadByQuantitySuccess
 } from './pokemons.actions';
-import { initial } from './pokemons.store';
 
 @Injectable()
 export class PokemonsEffects {
@@ -55,8 +54,5 @@ export class PokemonsEffects {
         tap(({ type, payload }) => { window.alert('Erro'); }),
     ), { dispatch: false });
 
-    constructor(
-        private actions$: Actions,
-        private pokemonsService: PokemonsService
-    ) { }
+    constructor(private actions$: Actions, private pokemonsService: PokemonsService) { }
 }
