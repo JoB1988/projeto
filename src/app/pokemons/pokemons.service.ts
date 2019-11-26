@@ -20,6 +20,14 @@ export class PokemonsService {
 
     constructor(private http: HttpClient) { }
 
+    public setFavoritePokemons(pokemonId: number): Observable<any> {
+        const headers = new HttpHeaders({ CACHE_CONTROL: NO_CACHE, PRAGMA: NO_CACHE });
+        return this.http.post<any>('http://localhost:3000/favorite', pokemonId, { headers }).pipe(
+            map((response: any) => response),
+            catchError((msg: any) => msg)
+        );
+    }
+
     public getAllPokemons(): Observable<Array<SimplePokemon>> {
         const headers = new HttpHeaders({ CACHE_CONTROL: NO_CACHE, PRAGMA: NO_CACHE });
         return this.http.get<any>(URL + 'pokemon?limit=1000&offset=0', { headers }).pipe(

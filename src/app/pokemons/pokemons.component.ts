@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ViewChild } from
 import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../app.store';
 import * as fromPokemons from './pokemons.store';
-import { PokemonsLoad, PokemonLoadByQuantity } from './pokemons.actions';
+import { PokemonsLoad, PokemonLoadByQuantity, PokemonsSetFavorite } from './pokemons.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,8 +20,9 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  displayedColumns: string[] = ['id', 'name', 'image', 'shinyform', 'ellipsis'];
+  displayedColumns: string[] = ['id', 'name', 'image', 'shinyform', 'favorite', 'ellipsis'];
 
+  public arrayFavoritePokemon: Array<number>;
   public dataSource: MatTableDataSource<Array<any>>;
   public readonly searchByQuantityInitial$ = this.store.pipe(select(fromPokemons.initial));
   public readonly searchByQuantityfinal$ = this.store.pipe(select(fromPokemons.final));
@@ -37,12 +38,12 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   constructor(private readonly store: Store<fromRoot.AppState>, public dialog: MatDialog) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.store.dispatch(PokemonsLoad());
     this.loadPokemonByQuantity();
   }
 
-  loadPokemonByQuantity() {
+  public loadPokemonByQuantity() {
     this.searchByQuantityInitial$
       .pipe(withLatestFrom(this.searchByQuantityfinal$), take(1))
       .subscribe(([initialNumber, finalNumber]) => {
@@ -53,11 +54,11 @@ export class PokemonsComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public  ngOnDestroy(): void {
     this.pokemonsSubscription.unsubscribe();
   }
 
-  openDialog(pokemon): void {
+  public openDialog(pokemon): void {
     console.log(pokemon)
     console.log(this.dataSource.data)
     const dialogRef = this.dialog.open(PokemonComponent, {
@@ -68,6 +69,10 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       
     });
+  }
+
+  public favoritePokemon(pokemonId) {
+    this.store.dispatch(PokemonsSetFavorite(pokemonId));
   }
 
 }

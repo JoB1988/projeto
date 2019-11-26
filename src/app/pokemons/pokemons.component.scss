@@ -30,6 +30,15 @@ table {
   }
 }
 
-svg{
+svg {
   max-height: 20px;
+}
+
+.favorite-button {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
