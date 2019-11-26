@@ -5,7 +5,7 @@ export enum Action {
     PokemonsLoad = '[Pokemons] Load',
     PokemonsLoadSuccess = '[Pokemons] Load Success',
     PokemonsLoadError = '[Pokemons] Load Error',
-    PokemonsFavoriteLoad = '[Pokemons] Load Favorite',
+    PokemonsLoadFavorite = '[Pokemons] Load Favorite',
     PokemonsLoadFavoriteSuccess = '[Pokemons] Load Favorite Success',
     PokemonsLoadFavoriteError = '[Pokemons] Load Favorite Error',
     PokemonsSetFavorite = '[Pokemons] Set Favorite',
@@ -20,9 +20,9 @@ export const PokemonsLoad = createAction(Action.PokemonsLoad);
 export const PokemonsLoadSuccess = createAction(Action.PokemonsLoadSuccess, props<{ payload: Array<SimplePokemon> }>());
 export const PokemonsLoadError = createAction(Action.PokemonsLoadError, props<{ payload: any }>());
 
-export const PokemonsLoadFavorite = createAction(Action.PokemonsLoad);
-export const PokemonsLoadFavoriteSuccess = createAction(Action.PokemonsLoadSuccess, props<{ payload: Array<number> }>());
-export const PokemonsLoadFavoriteError = createAction(Action.PokemonsLoadError, props<{ payload: any }>());
+export const PokemonsLoadFavorite = createAction(Action.PokemonsLoadFavorite);
+export const PokemonsLoadFavoriteSuccess = createAction(Action.PokemonsLoadFavoriteSuccess, props<{ payload: Array<number> }>());
+export const PokemonsLoadFavoriteError = createAction(Action.PokemonsLoadFavoriteError, props<{ payload: any }>());
 
 export const PokemonsSetFavorite = createAction(Action.PokemonsSetFavorite, props<{ payload: number }>());
 export const PokemonsSetFavoriteSuccess = createAction(Action.PokemonsSetFavoriteSuccess, props<{ payload: any }>());

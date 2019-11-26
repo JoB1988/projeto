@@ -46,8 +46,8 @@ export class PokemonsEffects {
         switchMap((payload) => {
             return this.pokemonsService.setFavoritePokemons(payload)
                 .pipe(
-                    // map(pokemons => (PokemonsLoadSuccess({ payload: pokemons }))),
-                    // catchError((msg) => of(PokemonsLoadError({ payload: msg }))),
+                    map(pokemons => (PokemonsLoadSuccess({ payload: pokemons }))),
+                    catchError((msg) => of(PokemonsLoadError({ payload: msg }))),
                 );
         })
     )
