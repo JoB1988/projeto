@@ -26,6 +26,18 @@ export class PokemonsEffects {
     )
     );
 
+    loadFavorite$ = createEffect(() => this.actions$.pipe(
+        ofType(Action.PokemonsLoad),
+        switchMap((payload) => {
+            return this.pokemonsService.loadFavoritePokemons()
+                .pipe(
+                    map(pokemons => (PokemonsLoadSuccess({ payload: pokemons }))),
+                    catchError((msg) => of(PokemonsLoadError({ payload: msg }))),
+                );
+        })
+    )
+    );
+
     setFavoritePokemons$ = createEffect(() => this.actions$.pipe(
         ofType(Action.PokemonsSetFavorite),
         switchMap((payload) => {
