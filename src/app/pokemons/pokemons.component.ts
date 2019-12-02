@@ -54,7 +54,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
       });
   }
 
-  public  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.pokemonsSubscription.unsubscribe();
   }
 
@@ -69,8 +69,8 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public favoritePokemon(pokemonId) {
-    this.store.dispatch(PokemonsSetFavorite(pokemonId));
+  public favoritePokemon(pokemonId, pokemonName) {
+    this.store.dispatch(PokemonsSetFavorite({payload: { id: pokemonId, name: pokemonName}}));
   }
 
 }

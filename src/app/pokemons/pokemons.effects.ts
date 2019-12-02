@@ -10,7 +10,9 @@ import {
     PokemonLoadByQuantityError,
     PokemonLoadByQuantitySuccess,
     PokemonsLoadFavoriteSuccess,
-    PokemonsLoadFavoriteError
+    PokemonsLoadFavoriteError,
+    PokemonsSetFavoriteSuccess,
+    PokemonsSetFavoriteError
 } from './pokemons.actions';
 
 @Injectable()
@@ -40,14 +42,13 @@ export class PokemonsEffects {
     )
     );
 
-    // Mecher aqui e no reducer
     setFavoritePokemons$ = createEffect(() => this.actions$.pipe(
         ofType(Action.PokemonsSetFavorite),
         switchMap((payload) => {
             return this.pokemonsService.setFavoritePokemons(payload)
                 .pipe(
-                    map(pokemons => (PokemonsLoadSuccess({ payload: pokemons }))),
-                    catchError((msg) => of(PokemonsLoadError({ payload: msg }))),
+                    map(pokemons => (PokemonsSetFavoriteSuccess({ payload: pokemons }))),
+                    catchError((msg) => of(PokemonsSetFavoriteError({ payload: msg }))),
                 );
         })
     )
@@ -67,7 +68,7 @@ export class PokemonsEffects {
 
     success$ = createEffect(() => this.actions$.pipe(
         ofType<{ type: string, payload: any }>(
-            // Action.PokemonsLoadSuccess,
+            Action.PokemonsSetFavoriteSuccess,
             // Action.PokemonLoadByQuantitySuccess,
         ),
         tap(({ type, payload }) => { window.alert('Sucesso'); })

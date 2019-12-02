@@ -24,7 +24,7 @@ export const PokemonsLoadFavorite = createAction(Action.PokemonsLoadFavorite);
 export const PokemonsLoadFavoriteSuccess = createAction(Action.PokemonsLoadFavoriteSuccess, props<{ payload: Array<number> }>());
 export const PokemonsLoadFavoriteError = createAction(Action.PokemonsLoadFavoriteError, props<{ payload: any }>());
 
-export const PokemonsSetFavorite = createAction(Action.PokemonsSetFavorite, props<{ payload: number }>());
+export const PokemonsSetFavorite = createAction(Action.PokemonsSetFavorite, props<{ payload: { id: number, name: string}}>());
 export const PokemonsSetFavoriteSuccess = createAction(Action.PokemonsSetFavoriteSuccess, props<{ payload: any }>());
 export const PokemonsSetFavoriteError = createAction(Action.PokemonsSetFavoriteError, props<{ payload: any }>());
 

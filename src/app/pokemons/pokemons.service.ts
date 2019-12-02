@@ -20,9 +20,8 @@ export class PokemonsService {
 
     constructor(private http: HttpClient) { }
 
-    public setFavoritePokemons(pokemonId: number): Observable<any> {
-        const headers = new HttpHeaders({ CACHE_CONTROL: NO_CACHE, PRAGMA: NO_CACHE });
-        return this.http.post<any>('http://localhost:3000/favorite', pokemonId, { headers }).pipe(
+    public setFavoritePokemons(pokemon: any): Observable<any> {
+        return this.http.post<any>('http://localhost:3000/favorite', pokemon.payload).pipe(
             map((response: any) => response),
             catchError((msg: any) => msg)
         );
