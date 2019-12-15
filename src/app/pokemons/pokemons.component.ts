@@ -60,7 +60,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   public openDialog(pokemon): void {
     const dialogRef = this.dialog.open(PokemonComponent, {
-      width: '250px',
+      width: '600px', height: '400px',
       data: pokemon
     });
 
@@ -70,7 +70,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   }
 
   public favoritePokemon(pokemonId, pokemonName) {
-    this.store.dispatch(PokemonsSetFavorite({payload: { id: pokemonId, name: pokemonName}}));
+    this.store.dispatch(PokemonsSetFavorite({ payload: { id: pokemonId, name: pokemonName } }));
   }
 
 }

@@ -6,3 +6,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '~@fortawesome/fontawesome-free/css/fontawesome.css';
 @import '~@fortawesome/fontawesome-free/css/brands.css';
 @import '~@fortawesome/fontawesome-free/css/solid.css';
+
+* { box-sizing: border-box; }
+
+.carousel {
+  background: #EEE;
+}
+
+.carousel-cell {
+  width: 50%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: gallery-cell;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
