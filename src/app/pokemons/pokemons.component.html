@@ -14,12 +14,18 @@
 
         <ng-container matColumnDef="image">
             <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
-            <mat-cell *matCellDef="let pokemon"> <img src="{{pokemon?.sprites?.front_default}}" alt=""></mat-cell>
+            <mat-cell *matCellDef="let pokemon">
+                <mat-spinner *ngIf="!pokemon?.sprites?.front_default" value="90" diameter="20"></mat-spinner>
+                <img src="{{pokemon?.sprites?.front_default}}" alt="">
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="shinyform">
             <mat-header-cell *matHeaderCellDef> Shiny </mat-header-cell>
-            <mat-cell *matCellDef="let pokemon"> <img src="{{pokemon?.sprites?.front_shiny}}" alt=""></mat-cell>
+            <mat-cell *matCellDef="let pokemon">
+                <mat-spinner *ngIf="!pokemon?.sprites?.front_shiny" value="90" diameter="20"></mat-spinner>
+                <img src="{{pokemon?.sprites?.front_shiny}}" alt="">
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="favorite">
@@ -66,10 +72,13 @@
 
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
     </mat-table>
+
     <mat-spinner *ngIf="isLoading$ | async" style="margin: 150px auto;"></mat-spinner>
     <mat-paginator [disabled]="isLoading$ | async" (page)="loadPokemonByQuantity()" [pageSizeOptions]="[12, 24, 48, 96]"
         showFirstLastButtons></mat-paginator>
+
 </div>

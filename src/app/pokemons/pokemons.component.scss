@@ -41,4 +41,10 @@ svg {
   background-color: transparent;
   border: none;
   outline: none;
+  &:hover {
+    color: #ffbc00;
+  }
+  &:active {
+    opacity: .7;
+  }
 }
