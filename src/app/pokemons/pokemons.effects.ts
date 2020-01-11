@@ -68,7 +68,7 @@ export class PokemonsEffects {
 
     success$ = createEffect(() => this.actions$.pipe(
         ofType<{ type: string, payload: any }>(
-            Action.PokemonsSetFavoriteSuccess,
+            // Action.PokemonsSetFavoriteSuccess,
             // Action.PokemonLoadByQuantitySuccess,
         ),
         tap(({ type, payload }) => { window.alert('Sucesso'); })

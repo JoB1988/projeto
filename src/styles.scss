@@ -1,23 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-@import '~@angular/material/theming';
-@import '~@fortawesome/fontawesome-free/css/fontawesome.css';
-@import '~@fortawesome/fontawesome-free/css/brands.css';
-@import '~@fortawesome/fontawesome-free/css/solid.css';
+@import "~@angular/material/theming";
+@import "~@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "~@fortawesome/fontawesome-free/css/brands.css";
+@import "~@fortawesome/fontawesome-free/css/solid.css";
 
-* { box-sizing: border-box; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@mixin flexbox($row-direction) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: $row-direction;
+}
+
+// Carousel
+
+* {
+  box-sizing: border-box;
+}
 
 .carousel {
-  background: #EEE;
+  background: #eee;
 }
 
 .carousel-cell {
   width: 50%;
   height: 200px;
   margin-right: 10px;
-  background: #8C8;
+  background: #8c8;
   border-radius: 5px;
   counter-increment: gallery-cell;
 }
