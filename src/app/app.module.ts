@@ -11,9 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { CepModule } from './cep/cep.module';
 import { PageNotFoundModule } from './page-not-found/page-not-found.module';
+import { HeaderModule } from './header/header.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent],
   imports: [
     StoreModule.forRoot({}),
     EffectsModule.forRoot([PokemonsEffects]),
@@ -21,11 +22,11 @@ import { PageNotFoundModule } from './page-not-found/page-not-found.module';
       maxAge: 25
     }),
     PokemonsModule,
-    MatToolbarModule,
     AppRoutingModule,
     CepModule,
     HomeModule,
-    PageNotFoundModule
+    PageNotFoundModule,
+    HeaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
