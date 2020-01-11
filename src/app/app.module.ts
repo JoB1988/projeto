@@ -12,9 +12,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
+import { CepModule } from './cep/cep.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, CepComponent, PageNotFoundComponent],
+  declarations: [AppComponent, HeaderComponent, PageNotFoundComponent],
   imports: [
     StoreModule.forRoot({}),
     EffectsModule.forRoot([PokemonsEffects]),
@@ -24,7 +25,8 @@ import { HomeModule } from './home/home.module';
     PokemonsModule,
     MatToolbarModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    CepModule
   ],
   providers: [],
   bootstrap: [AppComponent]
