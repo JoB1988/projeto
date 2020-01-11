@@ -7,15 +7,13 @@ import { PokemonsEffects } from './pokemons/pokemons.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CepComponent } from './cep/cep.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { CepModule } from './cep/cep.module';
+import { PageNotFoundModule } from './page-not-found/page-not-found.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, PageNotFoundComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     StoreModule.forRoot({}),
     EffectsModule.forRoot([PokemonsEffects]),
@@ -25,8 +23,9 @@ import { CepModule } from './cep/cep.module';
     PokemonsModule,
     MatToolbarModule,
     AppRoutingModule,
+    CepModule,
     HomeModule,
-    CepModule
+    PageNotFoundModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CepComponent } from './cep.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
