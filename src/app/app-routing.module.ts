@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 const ROUTES: Routes = [
   {
-    path: '', redirectTo: '/home', pathMatch: 'full'
+    path: '', redirectTo: 'home', pathMatch: 'full'
   },
   {
     path: 'home', component: HomeComponent
