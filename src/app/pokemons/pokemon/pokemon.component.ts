@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-pokemon',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokemonComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<PokemonComponent>,
+    @Inject(MAT_DIALOG_DATA) public pokemon: any) {
+
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit() {
   }
+
+
 
 }

@@ -1,3 +1,20 @@
-<p>
-  pokemon works!
-</p>
+<div style="    height: 100%;
+display: flex;
+flex-wrap: wrap;">
+
+  <h1 style="width: 100%;" mat-dialog-title>{{pokemon?.name}}</h1>
+  <div mat-dialog-content style="width: 100%;">
+    <img src="{{pokemon?.sprites?.front_default}}" alt="">
+    <img src="{{pokemon?.sprites?.back_default}}" alt="">
+    <img src="{{pokemon?.sprites?.front_female}}" alt="">
+    <img src="{{pokemon?.sprites?.back_female}}" alt="">
+    <img src="{{pokemon?.sprites?.front_shiny}}" alt="">
+    <img src="{{pokemon?.sprites?.back_shiny}}" alt="">
+    <img src="{{pokemon?.sprites?.front_shiny_female}}" alt="">
+    <img src="{{pokemon?.sprites?.back_shiny_female}}" alt="">
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+  </div>
+</div>
