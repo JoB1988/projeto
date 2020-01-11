@@ -13,9 +13,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule, MatIconModule, MatFormFieldModule, MatDialogModule } from '@angular/material';
-
-
+import { MatMenuModule, MatIconModule, MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,13 +33,11 @@ import { MatMenuModule, MatIconModule, MatFormFieldModule, MatDialogModule } fro
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [PokemonsService],
   exports: [PokemonsComponent],
   entryComponents: [PokemonComponent]
 })
 export class PokemonsModule { }
-
-
-
