@@ -1,0 +1,7 @@
+@import "../../styles.scss";
+
+.recaptcha {
+    @include flexbox(row);
+    justify-content: center;
+}
+

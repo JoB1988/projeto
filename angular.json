@@ -32,7 +32,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/flickity/dist/flickity.pkgd.min.js"
+              "./node_modules/flickity/dist/flickity.pkgd.min.js",
+              "src/app/home/home.js"
             ],
             "es5BrowserSupport": true
           },
