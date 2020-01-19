@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CepService } from './cep.service';
+import { debounceTime } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-cep',
@@ -9,7 +11,6 @@ import { CepService } from './cep.service';
 })
 export class CepComponent implements OnInit {
 
-  public address;
   states = [
     { sign: 'AC', name: 'Acre', capital: 'Rio Branco' },
     { sign: 'AL', name: 'Alagoas', capital: 'Maceió' },
@@ -39,32 +40,31 @@ export class CepComponent implements OnInit {
     { sign: 'TO', name: 'Tocantins', capital: 'Palmas' }
   ];
 
-  public cepForm;
+  public cepForm: BehaviorSubject<FormGroup> = new BehaviorSubject(undefined);
   constructor(public readonly formBuilder: FormBuilder, private cepService: CepService) { }
 
   ngOnInit() {
-    this.cepForm = this.formBuilder.group(
+    this.cepForm.next(this.formBuilder.group(
       {
-        cep: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]],
+        cep: ['', Validators.compose([Validators.required, Validators.maxLength(8), Validators.minLength(8)])],
         address: ['', Validators.required],
         state: [{ sign: '', name: '', capital: '' }, Validators.required],
       }
-    );
+    ));
   }
 
-  search() {
-    let formValue;
-    if (this.cepForm.controls.cep.valid) {
-      formValue = this.cepForm.value.cep;
-    } else {
-      formValue = this.cepForm.value.state.sign + '/' + this.cepForm.value.state.capital + '/' + this.cepForm.value.address;
+  searchDirectionByCep() {
+    // this.cepForm.pipe(debounceTime(1400)).subscribe(cepForm => { });
+    if (this.cepForm.value.controls.cep.invalid) {
+      return;
     }
-    this.cepService.getAddress(formValue).subscribe(response => {
-      this.address = response;
+    this.cepService.getAddress(this.cepForm.value.controls.cep.value).subscribe(response => {
+      this.cepForm.value.controls.address.setValue(response.logradouro);
     });
   }
 
   disableSearchButton(): boolean | void {
+    // tslint:disable-next-line: max-line-length
     // return (this.cepForm.controls.cep.invalid && (this.cepForm.controls.address.invalid || this.cepForm.controls.state.invalid)) || (this.cepForm.controls.cep.valid && (this.cepForm.controls.address.valid || this.cepForm.controls.state.valid));
   }
 

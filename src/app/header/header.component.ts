@@ -27,8 +27,8 @@ export class HeaderComponent implements OnInit {
     //   this.navigation.appendChild(this.divs[1]);
     //   this.navigation.appendChild(this.divs[0]);
     // }
-    console.log(this.navigation);
-    console.log(this.navigation.nativeElement);
+    // console.log(this.navigation);
+    // console.log(this.navigation.nativeElement);
     // this.navigation.nativeElement.insertAdjacentHTML('beforeend', this.div);
     return '';
   }

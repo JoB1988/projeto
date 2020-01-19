@@ -2,23 +2,60 @@
 
 form {
   @include flexbox(row);
-  @include orientation(space-around, center);
+  @include orientation(space-between, center);
   width: 100%;
-  @media (min-width: 500px) {
+  padding: 0 20px;
+
+  button {
+    width: 100px;
+    height: 50px;
+    border: 1px solid;
+  }
+
+  @media (min-width: 1000px) {
     mat-form-field {
-        &:last-of-type{
-            max-width: 50px;
-        }
+      &:first-child {
+        width: calc(25% - 117.5px);
+      } 
+      &:nth-child(2) {
+        width: calc(75% - 117.5px);
+      }
+      &:last-of-type {
+        max-width: 75px;
+      }
     }
   }
-  @media (max-width: 499px) {
+
+  @media (max-width: 999px) {
     mat-form-field {
-      margin: 0 auto;
-      width: 90%;
+      &:first-child {
+        width: calc(30% - 10px);
+      } 
+      &:nth-child(2) {
+        width: calc(70% - 10px);
+      }
+      &:last-of-type {
+        width: calc(100% - 120px);
+      }
     }
   }
+
+  @media (max-width: 699px) {
+    mat-form-field {
+      &:first-child {
+        width: 100%;
+      } 
+      &:nth-child(2) {
+        width: 100%;
+      }
+      &:last-of-type {
+        width: calc(100% - 120px);
+      }
+    }
+  }
+
 }
 
-div:last-of-type {
-  
+::ng-deep .mat-form-field-wrapper {
+  padding-top: 1.34375em;
 }

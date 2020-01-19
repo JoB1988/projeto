@@ -1,11 +1,14 @@
-<form [formGroup]="cepForm">
-  <mat-form-field>
-    <input matInput placeholder="Digite o cep" formControlName="cep" maxlength="8">
+<form [formGroup]="cepForm | async">
+  <mat-form-field appearance="outline">
+    <mat-label>Cep</mat-label>
+    <input matInput placeholder="Digite o cep" formControlName="cep" maxlength="8" (ngModelChange)="searchDirectionByCep()" >
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Address</mat-label>
     <input matInput placeholder="Digite a rua" formControlName="address">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>UF</mat-label>
     <mat-select formControlName="state" placeholder="UF">
       <mat-option *ngFor="let state of states" [value]="state">
         {{state.sign}}
@@ -15,42 +18,44 @@
   <button mat-button type="button" (click)="search()" [disabled]="disableSearchButton()">Buscar</button>
 </form>
 
-<div *ngFor="let item of address">
-  <label for="cep">Cep</label>
-  <span id="cep">{{item?.cep || ""}}</span>
-</div>
-
-<div *ngIf="address">
-  <div>
-    <label for="cep">Cep: </label>
-    <span id="cep">{{ address?.cep ? address?.cep : ""}}</span>
+<section style="width: 100%; margin: 0 auto;">
+  <!-- <div *ngFor="let item of address">
+    <label for="cep">Cep</label>
+    <span id="cep">{{item?.cep || ""}}</span>
+  </div> -->
+  
+  <div *ngIf="address">
+    <div>
+      <label for="cep">Cep: </label>
+      <span id="cep">{{ address?.cep ? address?.cep : ""}}</span>
+    </div>
+    <div>
+      <label for="logradouro">Logradouro: </label>
+      <span id="logradouro">{{ address?.logradouro ? address?.logradouro : ""}}</span>
+    </div>
+    <div>
+      <label for="complemento">Complemento: </label>
+      <span id="complemento">{{ address?.complemento ? address?.complemento : ""}}</span>
+    </div>
+    <div>
+      <label for="localidade">Localidade: </label>
+      <span id="localidade">{{ address?.localidade ? address?.localidade : ""}}</span>
+    </div>
+    <div>
+      <label for="UF">UF: </label>
+      <span id="UF">{{ address?.uf ? address?.uf : ""}}</span>
+    </div>
+    <div>
+      <label for="cep">Unidade: </label>
+      <span id="cep">{{ address.unidade ? address.unidade : ""}}</span>
+    </div>
+    <div>
+      <label for="ibge">IBGE: </label>
+      <span id="ibge">{{ address?.ibge ?  address?.ibge : ""}}</span>
+    </div>
+    <div>
+      <label for="gia">GIA: </label>
+      <span id="gia">{{ address?.gia ? address?.gia : ""}}</span>
+    </div>
   </div>
-  <div>
-    <label for="logradouro">Logradouro: </label>
-    <span id="logradouro">{{ address?.logradouro ? address?.logradouro : ""}}</span>
-  </div>
-  <div>
-    <label for="complemento">Complemento: </label>
-    <span id="complemento">{{ address?.complemento ? address?.complemento : ""}}</span>
-  </div>
-  <div>
-    <label for="localidade">Localidade: </label>
-    <span id="localidade">{{ address?.localidade ? address?.localidade : ""}}</span>
-  </div>
-  <div>
-    <label for="UF">UF: </label>
-    <span id="UF">{{ address?.uf ? address?.uf : ""}}</span>
-  </div>
-  <div>
-    <label for="cep">Unidade: </label>
-    <span id="cep">{{ address.unidade ? address.unidade : ""}}</span>
-  </div>
-  <div>
-    <label for="ibge">IBGE: </label>
-    <span id="ibge">{{ address?.ibge ?  address?.ibge : ""}}</span>
-  </div>
-  <div>
-    <label for="gia">GIA: </label>
-    <span id="gia">{{ address?.gia ? address?.gia : ""}}</span>
-  </div>
-</div>
+</section>
