@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CepService } from './cep.service';
 import { debounceTime } from 'rxjs/operators';
@@ -10,6 +10,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./cep.component.scss']
 })
 export class CepComponent implements OnInit {
+
+  private keyBoardKeyPressed;
 
   states = [
     { sign: 'AC', name: 'Acre', capital: 'Rio Branco' },
@@ -40,24 +42,62 @@ export class CepComponent implements OnInit {
     { sign: 'TO', name: 'Tocantins', capital: 'Palmas' }
   ];
 
-  public cepForm: BehaviorSubject<FormGroup> = new BehaviorSubject(undefined);
+  public cepForm: BehaviorSubject<FormGroup> = new BehaviorSubject(this.formBuilder.group({
+    // tslint:disable-next-line: max-line-length
+    cep: ['', Validators.compose([Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern(/^\d{5}-\d{3}$/)])],
+    address: ['', Validators.required],
+    state: [{ sign: '', name: '', capital: '' }, Validators.required],
+  }));
+
   constructor(public readonly formBuilder: FormBuilder, private cepService: CepService) { }
 
-  ngOnInit() {
-    this.cepForm.next(this.formBuilder.group(
-      {
-        cep: ['', Validators.compose([Validators.required, Validators.maxLength(8), Validators.minLength(8)])],
-        address: ['', Validators.required],
-        state: [{ sign: '', name: '', capital: '' }, Validators.required],
-      }
-    ));
+  ngOnInit() { }
+
+  @HostListener('document:keyup', ['$event']) handleDeleteKeyboardEvent(event: KeyboardEvent) {
+    this.keyBoardKeyPressed = event.keyCode;
   }
 
-  searchDirectionByCep() {
-    // this.cepForm.pipe(debounceTime(1400)).subscribe(cepForm => { });
+  public searchDirectionByCep() {
+    this.cepForm.pipe(debounceTime(100)).subscribe(cepForm => {
+      if (this.cepForm.value.controls.cep.value.endsWith(' ')) {
+        this.cepForm.value.controls.cep.setValue(this.cepForm.value.controls.cep.value.replace(' ', ''));
+      }
+      debugger
+      // tslint:disable-next-line: max-line-length
+      if ((this.cepForm.value.controls.cep.value.length >= 5 && this.cepForm.value.controls.cep.value.length <= 9) && !(this.keyBoardKeyPressed === 46 || this.keyBoardKeyPressed === 8)) {
+        if (this.cepForm.value.controls.cep.value.length === 5) {
+          this.cepForm.value.controls.cep.setValue(this.cepForm.value.controls.cep.value + '-');
+        } else if (this.cepForm.value.controls.cep.value.indexOf('-') !== 5 && this.cepForm.value.controls.cep.value.length >= 6) {
+          const value = this.cepForm.value.controls.cep.value;
+          this.cepForm.value.controls.cep.setValue(value.substr(0, 5) + '-' + value.substr(5, value.length));
+        }
+      } else {
+        const value = this.cepForm.value.controls.cep.value.split('-');
+        if (value.length === 2) {
+          if (this.cepForm.value.controls.cep.value.length > 5) {
+            let newValue = value[0] + value[1];
+            newValue = newValue.substr(0, 5) + '-' + newValue.substr(5, newValue.length);
+            this.cepForm.value.controls.cep.setValue(newValue);
+          } else if (this.cepForm.value.controls.cep.value.length === 5 && value[1] !== '') {
+            this.cepForm.value.controls.cep.setValue(this.cepForm.value.controls.cep.value + '-');
+          } else {
+            this.cepForm.value.controls.cep.setValue(value[0] + value[1]);
+          }
+        } else {
+          if (this.cepForm.value.controls.cep.value.length === 5 && !(this.keyBoardKeyPressed === 46 || this.keyBoardKeyPressed === 8)) {
+            this.cepForm.value.controls.cep.setValue(this.cepForm.value.controls.cep.value + '-');
+          } else if (this.cepForm.value.controls.cep.value.indexOf('-') !== 5 && this.cepForm.value.controls.cep.value.length >= 6) {
+            const value = this.cepForm.value.controls.cep.value;
+            this.cepForm.value.controls.cep.setValue(value.substr(0, 5) + '-' + value.substr(5, value.length));
+          }
+        }
+      }
+    });
+
     if (this.cepForm.value.controls.cep.invalid) {
       return;
     }
+
     this.cepService.getAddress(this.cepForm.value.controls.cep.value).subscribe(response => {
       this.cepForm.value.controls.address.setValue(response.logradouro);
     });

@@ -1,7 +1,7 @@
 <form [formGroup]="cepForm | async">
   <mat-form-field appearance="outline">
     <mat-label>Cep</mat-label>
-    <input matInput placeholder="Digite o cep" formControlName="cep" maxlength="8" (ngModelChange)="searchDirectionByCep()" >
+    <input matInput placeholder="Digite o cep" formControlName="cep" maxlength="9" (ngModelChange)="searchDirectionByCep()">
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Address</mat-label>
