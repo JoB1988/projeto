@@ -10,6 +10,7 @@ const PRAGMA = 'pragma';
 const NO_CACHE = 'no-cache';
 const CACHE_CONTROL = 'Cache-Control';
 const URL = 'https://pokeapi.co/api/v2/';
+const URLPOST = 'http://localhost:3000/favorite';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,7 @@ export class PokemonsService {
     constructor(private http: HttpClient) { }
 
     public setFavoritePokemons(pokemon: any): Observable<any> {
-        return this.http.post<any>('http://localhost:3000/favorite', pokemon.payload).pipe(
+        return this.http.post<any>(URLPOST, pokemon.payload).pipe(
             map((response: any) => response),
             catchError((msg: any) => msg)
         );

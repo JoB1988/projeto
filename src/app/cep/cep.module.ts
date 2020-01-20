@@ -4,6 +4,9 @@ import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, M
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CepService } from './cep.service';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import { CepService } from './cep.service';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    NgxMaskModule.forRoot(options)
   ],
   exports: [CepComponent],
   providers: [CepService]
