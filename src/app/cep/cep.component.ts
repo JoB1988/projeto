@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CepService } from './cep.service';
 import { BehaviorSubject } from 'rxjs';
@@ -10,6 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CepComponent implements OnInit {
 
+  public addressMask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+  public alphanumericPatterns = { 'X': { pattern: new RegExp(/^[a-zA-Z0-9ãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'X' } };
   states = [
     { state: 'AC', name: 'Acre', capital: 'Rio Branco' },
     { state: 'AL', name: 'Alagoas', capital: 'Maceió' },
@@ -42,7 +44,7 @@ export class CepComponent implements OnInit {
   public cepForm: BehaviorSubject<FormGroup> = new BehaviorSubject(this.formBuilder.group({
     // tslint:disable-next-line: max-line-length
     cep: ['', Validators.required],
-    address:  ['', Validators.required],
+    address: ['', Validators.compose([Validators.required])],
     state: ['', Validators.required],
   }));
 

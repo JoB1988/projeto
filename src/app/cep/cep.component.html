@@ -1,11 +1,15 @@
 <form [formGroup]="cepForm | async">
   <mat-form-field appearance="outline">
     <mat-label>Cep</mat-label>
-    <input matInput placeholder="Digite o cep" formControlName="cep" mask="00000-000" (ngModelChange)="searchDirectionByCep()">
+    <input matInput placeholder="Digite o cep" formControlName="cep" mask="00000-000"
+      (ngModelChange)="searchDirectionByCep()">
+    <mat-error>campo obrigatório</mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Address</mat-label>
-    <input matInput placeholder="Digite a rua" formControlName="address">
+    <input matInput placeholder="Digite a rua" formControlName="address" mask="{{addressMask}}"
+      [patterns]="alphanumericPatterns" [validation]="false">
+    <mat-error>campo obrigatório</mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>UF</mat-label>
@@ -14,6 +18,7 @@
         {{state.state}}
       </mat-option>
     </mat-select>
+    <mat-error>campo obrigatório</mat-error>
   </mat-form-field>
   <button mat-button type="button" [disabled]="disableSearchButton()" (click)="saveForm()">Cadastrar</button>
 </form>
@@ -23,7 +28,7 @@
     <label for="cep">Cep</label>
     <span id="cep">{{item?.cep || ""}}</span>
   </div> -->
-  
+
   <div *ngIf="address">
     <div>
       <label for="cep">Cep: </label>
