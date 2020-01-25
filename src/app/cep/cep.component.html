@@ -1,27 +1,98 @@
-<form [formGroup]="cepForm | async">
-  <mat-form-field appearance="outline">
-    <mat-label>Cep</mat-label>
-    <input matInput placeholder="Digite o cep" formControlName="cep" mask="00000-000"
-      (ngModelChange)="searchDirectionByCep()">
-    <mat-error>campo obrigatório</mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Address</mat-label>
-    <input matInput placeholder="Digite a rua" formControlName="address" mask="{{addressMask}}"
-      [patterns]="alphanumericPatterns" [validation]="false">
-    <mat-error>campo obrigatório</mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>UF</mat-label>
-    <mat-select formControlName="state" placeholder="UF">
-      <mat-option *ngFor="let state of states" [value]="state">
-        {{state.state}}
-      </mat-option>
-    </mat-select>
-    <mat-error>campo obrigatório</mat-error>
-  </mat-form-field>
-  <button mat-button type="button" [disabled]="disableSearchButton()" (click)="saveForm()">Cadastrar</button>
-</form>
+<section id="form">
+  <form [formGroup]="cepForm$ | async">
+    <div formGroupName="pessoa" class="group__pessoa">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" mask="{{lettersMask}}" [patterns]="lettersPattern"
+        [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput formControlName="sobrenome" mask="{{lettersMask}}" [patterns]="lettersPattern"
+        [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Data de Nascimento</mat-label>
+        <input matInput formControlName="nasc">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpf" mask="000.000.000-00">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>RG</mat-label>
+        <input matInput formControlName="rg" mask="00.000.000-A">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Profissão</mat-label>
+        <input matInput formControlName="profissao" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+    </div>
+    <div formGroupName="direcao" class="group__direcao">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cep</mat-label>
+        <input matInput formControlName="cep" mask="00000-000" (ngModelChange)="searchDirectionByCep()">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Logradouro</mat-label>
+        <input matInput formControlName="logradouro" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+          [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>UF</mat-label>
+        <mat-select formControlName="uf">
+          <mat-option *ngFor="let state of states" [value]="state">
+            {{state}}
+          </mat-option>
+        </mat-select>
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="cidade" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+          [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+          [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Complemento</mat-label>
+        <input matInput formControlName="complemento" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+          [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+
+     <mat-form-field appearance="outline">
+        <mat-label>Referencia</mat-label>
+        <input matInput formControlName="referencia" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+          [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+
+    </div>
+    <button mat-button type="button" class="save__button" [disabled]="disableSearchButton()"
+      (click)="saveForm()">Cadastrar</button>
+  </form>
+</section>
 
 <section style="width: 100%; margin: 0 auto;">
   <!-- <div *ngFor="let item of address">

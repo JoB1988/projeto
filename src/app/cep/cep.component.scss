@@ -1,61 +1,148 @@
 @import "../../styles.scss";
 
-form {
-  @include flexbox(row);
-  @include orientation(space-between, center);
-  width: 100%;
-  padding: 0 20px;
+#form {
+  form {
+    @include flexbox(row);
+    @include orientation(flex-end, center);
+    width: 100%;
+    padding: 0 20px;
 
-  button {
-    width: 100px;
-    height: 50px;
-    border: 1px solid;
-  }
+    .save__button {
+      width: 100px;
+      height: 50px;
+      border: 1px solid;
+    }
 
-  @media (min-width: 1000px) {
-    mat-form-field {
-      &:first-child {
-        width: calc(25% - 117.5px);
-      } 
-      &:nth-child(2) {
-        width: calc(75% - 117.5px);
+    .group__pessoa {
+      width: 100%;
+      @include flexbox(row);
+      @include orientation(space-between, center);
+      @media (min-width: 800px) {
+        mat-form-field {
+          &:nth-child(4),
+          &:nth-child(5),
+          &:nth-child(6) {
+            width: calc(33.33% - 15px);
+          }
+          &:nth-child(1),
+          &:nth-child(3) {
+            width: 25%;
+          }
+          &:nth-child(2) {
+            width: calc(50% - 40px);
+          }
+        }
       }
-      &:last-of-type {
-        max-width: 75px;
+      @media (max-width: 799px) {
+        mat-form-field {
+          &:nth-child(1) {
+            width: calc(40% - 10px);
+          }
+          &:nth-child(2) {
+            width: calc(60% - 10px);
+          }
+          &:not(:nth-child(1), :nth-child(2)) {
+            width: calc(50% - 10px);
+          }
+        }
+      }
+      @media (max-width: 499px) {
+        mat-form-field {
+          width: 100% !important;
+        }
       }
     }
-  }
 
-  @media (max-width: 999px) {
-    mat-form-field {
-      &:first-child {
-        width: calc(30% - 10px);
-      } 
-      &:nth-child(2) {
-        width: calc(70% - 10px);
+    .group__direcao {
+      width: 100%;
+      @include flexbox(row);
+      @include orientation(space-between, center);
+      mat-form-field {
+        &:nth-child(3) {
+          width: 100px;
+        }
       }
-      &:last-of-type {
-        width: calc(100% - 120px);
+      @media (min-width: 800px) {
+        mat-form-field {
+          &:nth-child(1) {
+            width: 25%;
+          }
+          &:nth-child(2) {
+            width: calc(75% - 140px);
+          }
+          width: calc(33.33% - 15px);
+        }
+      }
+      @media (min-width: 500px) and (max-width: 799px) {
+        
+        mat-form-field {
+          &:nth-child(1) {
+            width: 30%;
+          }
+          &:nth-child(2) {
+            width: calc(70% - 20px);
+          }
+          &:nth-child(4), &:nth-child(5) {
+            width: calc(50% - 70px);
+          }
+          width: calc(50% - 10px);
+        }
+      }
+      @media (max-width: 499px) {
+        mat-form-field {
+          width: 100% !important;
+        }
       }
     }
-  }
 
-  @media (max-width: 699px) {
-    mat-form-field {
-      &:first-child {
-        width: 100%;
-      } 
-      &:nth-child(2) {
-        width: 100%;
-      }
-      &:last-of-type {
-        width: calc(100% - 120px);
-      }
-    }
-  }
+    // @media (min-width: 1000px) {
+    //   mat-form-field {
+    //     &:first-child {
+    //       width: calc(25% - 117.5px);
+    //     }
+    //     &:nth-child(2) {
+    //       width: calc(75% - 117.5px);
+    //     }
+    //     &:last-of-type {
+    //       max-width: 75px;
+    //     }
+    //   }
+    // }
 
+    // @media (max-width: 999px) {
+    //   mat-form-field {
+    //     &:first-child {
+    //       width: calc(30% - 10px);
+    //     }
+    //     &:nth-child(2) {
+    //       width: calc(70% - 10px);
+    //     }
+    //     &:last-of-type {
+    //       width: calc(100% - 120px);
+    //     }
+    //   }
+    // }
+
+    // @media (max-width: 699px) {
+    //   mat-form-field {
+    //     &:first-child {
+    //       width: 100%;
+    //     }
+    //     &:nth-child(2) {
+    //       width: 100%;
+    //     }
+    //     &:last-of-type {
+    //       width: calc(100% - 120px);
+    //     }
+    //   }
+    // }
+  }
 }
 
 ::ng-deep .mat-form-field-wrapper {
   padding-top: 1.34375em;
+}
+
+::ng-deep .mat-form-field-subscript-wrapper {
+  padding: 0 !important;
 }
