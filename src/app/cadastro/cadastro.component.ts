@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from './cadastro.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -63,18 +63,22 @@ export class CadastroComponent implements OnInit {
       referencia: ['']
     }),
   }));
+  @ViewChild('nomeInput', { static: true }) nomeInput;
 
   constructor(public readonly formBuilder: FormBuilder, private cadastroService: CadastroService) { }
 
-  ngOnInit() { }
+  ngOnInit() {this.nomeInput.nativeElement.focus(); }
 
   public searchDirectionByCep() {
-    if (this.cepForm$.value.controls.cep.invalid) {
+    if (this.cepForm$.value.controls.direcao['controls'].cep.invalid) {
       return;
     }
-    this.cadastroService.getAddress(this.cepForm$.value.controls.cep.value).subscribe(response => {
-      this.cepForm$.value.controls.logradouro.setValue(response.logradouro);
-      this.cepForm$.value.controls.uf.setValue(response.uf);
+    this.cadastroService.getAddress(this.cepForm$.value.controls.direcao.value.cep).subscribe(response => {
+      this.cepForm$.value.controls.direcao['controls'].logradouro.setValue(response.logradouro);
+      this.cepForm$.value.controls.direcao['controls'].uf.setValue(response.uf);
+      this.cepForm$.value.controls.direcao['controls'].cidade.setValue(response.localidade);
+      this.cepForm$.value.controls.direcao['controls'].complemento.setValue(response.complemento);
+      this.cepForm$.value.controls.direcao['controls'].bairro.setValue(response.bairro);
     });
   }
 
@@ -83,10 +87,4 @@ export class CadastroComponent implements OnInit {
 
     });
   }
-
-  disableSearchButton(): boolean | void {
-    // tslint:disable-next-line: max-line-length
-    // return (this.cepForm.controls.cep.invalid && (this.cepForm.controls.address.invalid || this.cepForm.controls.state.invalid)) || (this.cepForm.controls.cep.valid && (this.cepForm.controls.address.valid || this.cepForm.controls.state.valid));
-  }
-
 }
