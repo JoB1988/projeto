@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { CepService } from './cep.service';
+import { CadastroService } from './cadastro.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-cep',
-  templateUrl: './cep.component.html',
-  styleUrls: ['./cep.component.scss']
+  selector: 'app-cadastro',
+  templateUrl: './cadastro.component.html',
+  styleUrls: ['./cadastro.component.scss']
 })
-export class CepComponent implements OnInit {
+export class CadastroComponent implements OnInit {
 
   public alphanumericMask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
   public lettersMask = 'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL';
@@ -64,7 +64,7 @@ export class CepComponent implements OnInit {
     }),
   }));
 
-  constructor(public readonly formBuilder: FormBuilder, private cepService: CepService) { }
+  constructor(public readonly formBuilder: FormBuilder, private cadastroService: CadastroService) { }
 
   ngOnInit() { }
 
@@ -72,14 +72,14 @@ export class CepComponent implements OnInit {
     if (this.cepForm$.value.controls.cep.invalid) {
       return;
     }
-    this.cepService.getAddress(this.cepForm$.value.controls.cep.value).subscribe(response => {
+    this.cadastroService.getAddress(this.cepForm$.value.controls.cep.value).subscribe(response => {
       this.cepForm$.value.controls.logradouro.setValue(response.logradouro);
       this.cepForm$.value.controls.uf.setValue(response.uf);
     });
   }
 
   public saveForm() {
-    this.cepService.saveForm(this.cepForm$.value.value).subscribe(response => {
+    this.cadastroService.saveForm(this.cepForm$.value.value).subscribe(response => {
 
     });
   }

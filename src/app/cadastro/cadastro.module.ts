@@ -1,16 +1,16 @@
-import { CepComponent } from './cep.component';
+import { CadastroComponent } from './cadastro.component';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatOptionModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { CepService } from './cep.service';
+import { CadastroService } from './cadastro.service';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
 
 @NgModule({
   declarations: [
-    CepComponent
+    CadastroComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -23,7 +23,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
     MatOptionModule,
     NgxMaskModule.forRoot(options)
   ],
-  exports: [CepComponent],
-  providers: [CepService]
+  exports: [CadastroComponent],
+  providers: [CadastroService]
 })
-export class CepModule { }
+export class CadastroModule { }

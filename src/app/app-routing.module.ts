@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PokemonsComponent } from './pokemons/pokemons.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CepComponent } from './cep/cep.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
 const ROUTES: Routes = [
   {
@@ -18,7 +16,7 @@ const ROUTES: Routes = [
     path: 'pokemons', component: PokemonsComponent
   },
   {
-    path: 'ceps', component: CepComponent
+    path: 'cadastro', component: CadastroComponent
   },
   { path: '**', component: PageNotFoundComponent }
 ];

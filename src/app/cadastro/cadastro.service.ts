@@ -12,7 +12,7 @@ const URLPOST = 'http://localhost:3000/forms';
 @Injectable({
     providedIn: 'root'
 })
-export class CepService {
+export class CadastroService {
 
     constructor(private http: HttpClient) { }
 

@@ -5,11 +5,9 @@ import { PokemonsModule } from './pokemons/pokemons.module';
 import { EffectsModule } from '@ngrx/effects';
 import { PokemonsEffects } from './pokemons/pokemons.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HeaderComponent } from './header/header.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
-import { CepModule } from './cep/cep.module';
+import { CadastroModule } from './cadastro/cadastro.module';
 import { PageNotFoundModule } from './page-not-found/page-not-found.module';
 import { HeaderModule } from './header/header.module';
 
@@ -23,7 +21,7 @@ import { HeaderModule } from './header/header.module';
     }),
     PokemonsModule,
     AppRoutingModule,
-    CepModule,
+    CadastroModule,
     HomeModule,
     PageNotFoundModule,
     HeaderModule
