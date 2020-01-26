@@ -46,18 +46,18 @@ export class CepComponent implements OnInit {
   public cepForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(this.formBuilder.group({
     // tslint:disable-next-line: max-line-length
     pessoa: this.formBuilder.group({
-      nome: ['', Validators.required],
-      sobrenome: ['', Validators.required],
+      nome: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      sobrenome: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       nasc: ['', Validators.required],
       cpf: ['', Validators.required],
       rg: ['', Validators.required],
-      profissao: ['', Validators.required],
+      profissao: ['', Validators.compose([Validators.required, Validators.minLength(5)])]
     }),
     direcao: this.formBuilder.group({
       cep: ['', Validators.required],
-      logradouro: ['', Validators.required],
-      cidade: ['', Validators.required],
-      bairro: ['', Validators.required],
+      logradouro: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      cidade: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      bairro: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       complemento: [''],
       uf: ['', Validators.required],
       referencia: ['']
