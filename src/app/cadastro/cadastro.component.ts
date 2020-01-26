@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from './cadastro.service';
 import { BehaviorSubject } from 'rxjs';
+import { Cadastro } from './cadastro';
 
 @Component({
   selector: 'app-cadastro',
@@ -67,7 +68,7 @@ export class CadastroComponent implements OnInit {
 
   constructor(public readonly formBuilder: FormBuilder, private cadastroService: CadastroService) { }
 
-  ngOnInit() {this.nomeInput.nativeElement.focus(); }
+  ngOnInit() { this.nomeInput.nativeElement.focus(); }
 
   public searchDirectionByCep() {
     if (this.cepForm$.value.controls.direcao['controls'].cep.invalid) {
@@ -83,8 +84,14 @@ export class CadastroComponent implements OnInit {
   }
 
   public saveForm() {
-    this.cadastroService.saveForm(this.cepForm$.value.value).subscribe(response => {
+    const CADASTRO: Cadastro = {
+      pessoa: this.cepForm$.value.controls.pessoa.value,
+      direcao: this.cepForm$.value.controls.direcao.value
+    };
+    this.cadastroService.saveForm(CADASTRO).subscribe(response => {
 
     });
   }
 }
+
+//  rever data picker

@@ -3,12 +3,12 @@
     <div formGroupName="pessoa" class="group__pessoa">
       <mat-form-field appearance="outline">
         <mat-label>Nome</mat-label>
-        <input matInput formControlName="nome" mask="{{lettersMask}}" [patterns]="lettersPattern" [validation]="false" #nomeInput>
+        <input matInput formControlName="nome" [dropSpecialCharacters]="false" mask="{{lettersMask}}" [patterns]="lettersPattern" [validation]="false" #nomeInput>
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Sobrenome</mat-label>
-        <input matInput formControlName="sobrenome" mask="{{lettersMask}}" [patterns]="lettersPattern"
+        <input matInput formControlName="sobrenome" [dropSpecialCharacters]="false" mask="{{lettersMask}}" [patterns]="lettersPattern"
           [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
@@ -32,7 +32,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Profissão</mat-label>
-        <input matInput formControlName="profissao" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        <input matInput formControlName="profissao" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
           [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
@@ -45,7 +45,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Logradouro</mat-label>
-        <input matInput formControlName="logradouro" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        <input matInput formControlName="logradouro" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
           [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
@@ -60,25 +60,25 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Cidade</mat-label>
-        <input matInput formControlName="cidade" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        <input matInput formControlName="cidade" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
           [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Bairro</mat-label>
-        <input matInput formControlName="bairro" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        <input matInput formControlName="bairro" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
           [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Complemento</mat-label>
-        <input matInput formControlName="complemento" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        <input matInput formControlName="complemento" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
           [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Referencia</mat-label>
-        <input matInput formControlName="referencia" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        <input matInput formControlName="referencia" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
           [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
