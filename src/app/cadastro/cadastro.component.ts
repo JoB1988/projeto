@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from './cadastro.service';
 import { BehaviorSubject } from 'rxjs';
 import { Cadastro } from './cadastro';
+import { Validator } from 'cpf-rg-validator';
+import { ValidateBrService } from 'angular-validate-br';
 
 @Component({
   selector: 'app-cadastro',
@@ -11,11 +13,13 @@ import { Cadastro } from './cadastro';
 })
 export class CadastroComponent implements OnInit {
 
-  public alphanumericMask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
-  public lettersMask = 'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL';
+  public device$ = new BehaviorSubject(false);
+  startDate = new Date();
+  public alphanumericMask = 'X{60}';
+  public lettersMask = 'L{50}';
   public lettersPattern = { 'L': { pattern: new RegExp(/^[a-zA-ZãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'L' } };
   public alphanumericPatterns = { 'X': { pattern: new RegExp(/^[a-zA-Z0-9ãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'X' } };
-  states = [
+  public states = [
     'AC',
     'AL',
     'AM',
@@ -50,9 +54,12 @@ export class CadastroComponent implements OnInit {
       nome: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       sobrenome: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       nasc: ['', Validators.required],
-      cpf: ['', Validators.required],
-      rg: ['', Validators.required],
-      profissao: ['', Validators.compose([Validators.required, Validators.minLength(5)])]
+      cpf: ['', Validators.compose([Validators.required, this.validateBrService.cpf])],
+      rg: ['', Validators.compose([Validators.required])],
+      oe: ['', Validators.required],
+      profissao: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      salario: ['', Validators.required],
+      marcar: [{ value: this.startDate, disabled: true }, Validators.required],
     }),
     direcao: this.formBuilder.group({
       cep: ['', Validators.required],
@@ -66,7 +73,11 @@ export class CadastroComponent implements OnInit {
   }));
   @ViewChild('nomeInput', { static: true }) nomeInput;
 
-  constructor(public readonly formBuilder: FormBuilder, private cadastroService: CadastroService) { }
+  constructor(
+    public readonly formBuilder: FormBuilder,
+    private readonly cadastroService: CadastroService,
+    private readonly validateBrService: ValidateBrService
+  ) { }
 
   ngOnInit() { this.nomeInput.nativeElement.focus(); }
 

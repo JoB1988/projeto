@@ -14,33 +14,50 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Data de Nascimento</mat-label>
-        <!-- <input matInput mask="00/00/0000" formControlName="nasc"> -->
-        <input matInput formControlName="nasc" [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput type="tel" mask="00/00/0000" formControlName="nasc">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>CPF</mat-label>
-        <input matInput formControlName="cpf" mask="000.000.000-00">
+        <input matInput type="tel" formControlName="cpf" mask="000.000.000-00">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>RG</mat-label>
-        <input matInput formControlName="rg" mask="00.000.000-A">
+        <input matInput formControlName="rg" mask="AA.000.000-A">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Orgão Expedidor</mat-label>
+        <input matInput type="text" formControlName="oe" mask="SSS" [validation]="false">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Profissão</mat-label>
-        <input matInput formControlName="profissao" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
+        <input matInput type="text" formControlName="profissao" [dropSpecialCharacters]="false" mask="{{alphanumericMask}}" [patterns]="alphanumericPatterns"
           [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Salário</mat-label>
+        <input matInput type="tel" formControlName="salario" [dropSpecialCharacters]="false" mask="00000" [validation]="false">
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Consulta</mat-label>
+        <!-- <input matInput type="date" formControlName="marcar" [matDatepicker]="picker"> -->
+        <input matInput formControlName="marcar" [matDatepicker]="picker" [min]="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker [touchUi]="(device$ | async)" disabled="false"></mat-datepicker>
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
     </div>
     <div formGroupName="direcao" class="group__direcao">
       <mat-form-field appearance="outline">
         <mat-label>Cep</mat-label>
-        <input matInput formControlName="cep" mask="00000-000" (ngModelChange)="searchDirectionByCep()">
+        <input matInput type="tel" formControlName="cep" mask="00000-000" (ngModelChange)="searchDirectionByCep()">
         <mat-error>campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
