@@ -5,7 +5,8 @@ import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, M
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CadastroService } from './cadastro.service';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
 
@@ -25,9 +26,13 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
+    NgxSpinnerModule
   ],
   exports: [CadastroComponent],
-  providers: [CadastroService, MatDatepickerModule, {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]
+  providers: [
+    CadastroService,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+  ]
 })
 export class CadastroModule { }
