@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { CadastroService } from './cadastro.service';
 import { BehaviorSubject } from 'rxjs';
 import { Cadastro } from './cadastro';
-import { Validator } from 'cpf-rg-validator';
 import { ValidateBrService } from 'angular-validate-br';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cadastro',
@@ -13,12 +13,15 @@ import { ValidateBrService } from 'angular-validate-br';
 })
 export class CadastroComponent implements OnInit {
 
-  public device$ = new BehaviorSubject(false);
-  startDate = new Date();
-  public alphanumericMask = 'X{60}';
+
+  public prefix = '';
+  public salaryMask = '0{10}';
   public lettersMask = 'L{50}';
-  public lettersPattern = { 'L': { pattern: new RegExp(/^[a-zA-ZãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'L' } };
+  public alphanumericMask = 'X{60}';
+  public lettersPatterns = { 'L': { pattern: new RegExp(/^[a-zA-ZãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'L' } };
   public alphanumericPatterns = { 'X': { pattern: new RegExp(/^[a-zA-Z0-9ãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'X' } };
+  public startDate;
+  public device$ = new BehaviorSubject(false);
   public states = [
     'AC',
     'AL',
@@ -48,6 +51,8 @@ export class CadastroComponent implements OnInit {
     'TO',
   ];
 
+  @ViewChild('nomeInput', { static: true }) nomeInput;
+
   public cepForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(this.formBuilder.group({
     // tslint:disable-next-line: max-line-length
     pessoa: this.formBuilder.group({
@@ -55,11 +60,11 @@ export class CadastroComponent implements OnInit {
       sobrenome: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       nasc: ['', Validators.required],
       cpf: ['', Validators.compose([Validators.required, this.validateBrService.cpf])],
-      rg: ['', Validators.compose([Validators.required])],
+      rg: ['', Validators.required],
       oe: ['', Validators.required],
       profissao: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       salario: ['', Validators.required],
-      marcar: [{ value: this.startDate, disabled: true }, Validators.required],
+      marcar: [{ value: new Date().toISOString().split('T')[0], disabled: false }, Validators.required],
     }),
     direcao: this.formBuilder.group({
       cep: ['', Validators.required],
@@ -71,15 +76,17 @@ export class CadastroComponent implements OnInit {
       referencia: ['']
     }),
   }));
-  @ViewChild('nomeInput', { static: true }) nomeInput;
 
   constructor(
     public readonly formBuilder: FormBuilder,
     private readonly cadastroService: CadastroService,
-    private readonly validateBrService: ValidateBrService
+    private readonly validateBrService: ValidateBrService,
+    private spinner: NgxSpinnerService
   ) { }
 
-  ngOnInit() { this.nomeInput.nativeElement.focus(); }
+  ngOnInit() {
+    this.nomeInput.nativeElement.focus();
+  }
 
   public searchDirectionByCep() {
     if (this.cepForm$.value.controls.direcao['controls'].cep.invalid) {
@@ -95,14 +102,40 @@ export class CadastroComponent implements OnInit {
   }
 
   public saveForm() {
+    this.spinner.show();
     const CADASTRO: Cadastro = {
       pessoa: this.cepForm$.value.controls.pessoa.value,
       direcao: this.cepForm$.value.controls.direcao.value
     };
-    this.cadastroService.saveForm(CADASTRO).subscribe(response => {
+    this.cadastroService.saveForm(CADASTRO).subscribe((response) => {
 
-    });
+    }, (error) => {
+      this.spinner.hide();
+    }, () => { this.spinner.hide(); });
   }
+
+  public salaryInput(focus) {
+    if (this.prefix && this.cepForm$.value.controls.pessoa['controls'].salario.invalid) {
+      this.prefix = '';
+    } else {
+      this.prefix = 'R$ ';
+      if (!focus) {
+        const COLON = this.cepForm$.value.controls.pessoa.value.salario.indexOf(',');
+        const VALUE = this.cepForm$.value.controls.pessoa['controls'].salario.value;
+        if (COLON === -1) {
+          this.cepForm$.value.controls.pessoa['controls'].salario.setValue(VALUE + ',00');
+        } else {
+          const LENGTH = this.cepForm$.value.controls.pessoa['controls'].salario.value.length;
+          if (LENGTH - COLON === 1) {
+            this.cepForm$.value.controls.pessoa['controls'].salario.setValue(VALUE + '00');
+          } else if (LENGTH - COLON === 2) {
+            this.cepForm$.value.controls.pessoa['controls'].salario.setValue(VALUE + '0');
+          }
+        }
+      }
+    }
+  }
+
 }
 
 //  rever data picker
