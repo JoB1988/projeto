@@ -48,7 +48,6 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Consulta</mat-label>
-        <!-- <input matInput type="date" formControlName="marcar" [matDatepicker]="picker"> -->
         <input matInput formControlName="marcar" [matDatepicker]="picker" [min]="startDate">
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
@@ -109,11 +108,6 @@
 </section>
 
 <section style="width: 100%; margin: 0 auto;">
-  <!-- <div *ngFor="let item of address">
-    <label for="cep">Cep</label>
-    <span id="cep">{{item?.cep || ""}}</span>
-  </div> -->
-
   <div *ngIf="address">
     <div>
       <label for="cep">Cep: </label>

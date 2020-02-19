@@ -5,12 +5,23 @@
 @import "~@fortawesome/fontawesome-free/css/brands.css";
 @import "~@fortawesome/fontawesome-free/css/solid.css";
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 html,
 body {
   height: 100%;
 }
+
 body {
-  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 

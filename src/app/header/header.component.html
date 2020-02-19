@@ -1,16 +1,21 @@
 <mat-toolbar color="primary" style="position: fixed; z-index: 1;">
   <mat-toolbar-row>
-    <nav #navigation class="navigation" [ngClass]="onResize()">
+    <nav #navigation class="navigation">
       <button id="menu-button" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu id="menu" #menu="matMenu">
-        <ul class="navigation-list">
+        <ul class="navigation-listBox">
           <li><a [routerLink]="['/home']" routerLinkActive="active">Home</a></li>
           <li><a [routerLink]="['/cadastro']" routerLinkActive="active">Cadastro</a></li>
           <li><a [routerLink]="['/pokemons']" routerLinkActive="active">Pokemons</a></li>
         </ul>
       </mat-menu>
+      <ul class="navigation-listRow">
+        <li><a [routerLink]="['/home']" routerLinkActive="active">Home</a></li>
+        <li><a [routerLink]="['/cadastro']" routerLinkActive="active">Cadastro</a></li>
+        <li><a [routerLink]="['/pokemons']" routerLinkActive="active">Pokemons</a></li>
+      </ul>
     </nav>
   </mat-toolbar-row>
 </mat-toolbar>
