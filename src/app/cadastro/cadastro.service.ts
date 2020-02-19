@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Cadastro } from './cadastro';
 
@@ -20,15 +20,23 @@ export class CadastroService {
     public getAddress(cepAddress: string): Observable<any> {
         const headers = new HttpHeaders({ CACHE_CONTROL: NO_CACHE, PRAGMA: NO_CACHE });
         return this.http.get<any>(`${URL + cepAddress}/json/`).pipe(
-            map((response: any) => response),
-            catchError((msg: any) => msg)
+            map((response: any) => {
+                return response;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(error);
+            })
         );
     }
 
     public saveForm(cadastro: Cadastro): Observable<any> {
         return this.http.post<any>(URLPOST, cadastro).pipe(
-            map((response: any) => response),
-            catchError((msg: any) => msg)
+            map((response: any) => {
+                return response;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(error);
+            })
         );
     }
 
