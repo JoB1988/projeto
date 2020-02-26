@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Cadastro } from './cadastro';
 import { ValidateBrService } from 'angular-validate-br';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-cadastro',
@@ -19,8 +20,9 @@ export class CadastroComponent implements OnInit {
   public lettersMask = 'L{50}';
   public alphanumericMask = 'X{60}';
   public lettersPatterns = { 'L': { pattern: new RegExp(/^[a-zA-ZãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'L' } };
-  public alphanumericPatterns = { 'X': { pattern: new RegExp(/^[a-zA-Z0-9ãõñáéíóúÁÉÍÓÚçÇ ]*$/), symbol: 'X' } };
+  public alphanumericPatterns = { 'X': { pattern: new RegExp(/^[a-zA-Z0-9ãõñáéíóúÁÉÍÓÚçÇºª ]*$/), symbol: 'X' } };
   public startDate;
+  public status$ = new BehaviorSubject(undefined);
   public device$ = new BehaviorSubject(false);
   public states = [
     'AC',
@@ -81,7 +83,8 @@ export class CadastroComponent implements OnInit {
     public readonly formBuilder: FormBuilder,
     private readonly cadastroService: CadastroService,
     private readonly validateBrService: ValidateBrService,
-    private spinner: NgxSpinnerService
+    private readonly spinner: NgxSpinnerService,
+    private readonly snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -102,6 +105,7 @@ export class CadastroComponent implements OnInit {
   }
 
   public saveForm() {
+    this.status$.next('Salvando');
     this.spinner.show();
     const CADASTRO: Cadastro = {
       pessoa: this.cepForm$.value.controls.pessoa.value,
@@ -111,7 +115,11 @@ export class CadastroComponent implements OnInit {
 
     }, (error) => {
       this.spinner.hide();
-    }, () => { this.spinner.hide(); });
+      this.snackBar.open('Error', 'ok', { duration: 2500, verticalPosition: 'top', horizontalPosition: 'right' });
+    }, () => {
+      this.spinner.hide();
+      this.snackBar.open('Sucesso', 'ok', { duration: 2500, verticalPosition: 'top', horizontalPosition: 'right' });
+    });
   }
 
   public salaryInput(focus) {
@@ -135,7 +143,6 @@ export class CadastroComponent implements OnInit {
       }
     }
   }
-
 }
 
 //  rever data picker
