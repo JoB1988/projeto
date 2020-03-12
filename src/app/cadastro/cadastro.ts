@@ -2,10 +2,10 @@
 export interface Direcao {
     cep: string;
     logradouro: string;
-    cidade: Date;
+    cidade: string;
     bairro: string;
-    complemento: string;
-    referencia: string;
+    complemento?: string;
+    referencia?: string;
     uf: string;
 }
 
